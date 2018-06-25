@@ -1,0 +1,54 @@
+version: '2'
+services:
+# Container MYSQL
+  start_mysql:
+    image: mysql:5.6.27
+    container_name: start_mysql
+    hostname: start_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=start123
+      - MYSQL_USER=start
+      - MYSQL_PASSWORD=start123
+      - MYSQL_DATABASE=start
+    ports:
+      - "3306:3306"
+# Django
+  start.com:
+    restart: always
+    container_name: start.com
+    hostname: start.com
+    build:
+      context: ./compose/local/django/
+      dockerfile: Dockerfile
+    environment:
+      - GCN_DEBUG=True
+      - PYTHONUNBUFFERED=0
+      - MYSQL_ROOT_PASSWORD=start123
+      - MYSQL_USER=start
+      - MYSQL_PASSWORD=start123
+      - MYSQL_DATABASE=gcn
+      - DBAAS_MYSQL_ENDPOINT=mysql://start:start123@start_mysql:3306/start
+      - DBAAS_MYSQL_PASSWORD=start123
+      - DBAAS_MYSQL_USER=start
+    links:
+      - start_mysql:start_mysql
+    volumes:
+      - .:/usr/src/app/
+    expose:
+      - "8000"
+    command: bash -c "source compose/local/startup.sh"
+    depends_on:
+      - start_mysql
+
+  start_web.com:
+    image: nginx
+    container_name: start_web.com
+    hostname: start_web.com
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app/
+      - ./compose/local/ngnix:/etc/nginx/conf.d
+    depends_on:
+      - start.com
+    command: [nginx-debug, '-g', 'daemon off;']
