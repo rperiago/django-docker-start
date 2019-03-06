@@ -2,7 +2,7 @@
 wheel==0.30.0
 
 # Conservative Django
-django==1.11.10 # pyup: <2.0
+django==2.1.7 
 
 # Configuration
 whitenoise==3.3.1

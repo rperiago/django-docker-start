@@ -26,7 +26,7 @@ services:
       - MYSQL_ROOT_PASSWORD=start123
       - MYSQL_USER=start
       - MYSQL_PASSWORD=start123
-      - MYSQL_DATABASE=gcn
+      - MYSQL_DATABASE=start
       - DBAAS_MYSQL_ENDPOINT=mysql://start:start123@start_mysql:3306/start
       - DBAAS_MYSQL_PASSWORD=start123
       - DBAAS_MYSQL_USER=start
