@@ -11,7 +11,7 @@ docker-compose build
 docker-compose up
 '''
 
-## create user Admin
+## Create user Admin
 '''
 docker-compose exec start.com python3 manage.py createsuperuser
 '''
