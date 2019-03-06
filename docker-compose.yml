@@ -23,13 +23,10 @@ services:
     environment:
       - GCN_DEBUG=True
       - PYTHONUNBUFFERED=0
-      - MYSQL_ROOT_PASSWORD=start123
+      - MYSQL_HOST=start_mysql
       - MYSQL_USER=start
       - MYSQL_PASSWORD=start123
       - MYSQL_DATABASE=start
-      - DBAAS_MYSQL_ENDPOINT=mysql://start:start123@start_mysql:3306/start
-      - DBAAS_MYSQL_PASSWORD=start123
-      - DBAAS_MYSQL_USER=start
     links:
       - start_mysql:start_mysql
     volumes:

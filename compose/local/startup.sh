@@ -1,5 +1,6 @@
 #!/bin/bash
 
+python3 compose/local/wait_mysql.py
 python3 manage.py collectstatic -c --noinput
 python3 manage.py --settings=server.settings
 python3 manage.py migrate
